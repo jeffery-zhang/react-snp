@@ -8,30 +8,27 @@ const isProduction = process.env.NODE_ENV == 'production'
 const stylesHandler = 'style-loader'
 
 let [entry, plugins] = [
-  [
-    './src/index.ts',
-  ],
+  './lib/index.ts',
   [],
 ]
 if (!isProduction) {
-  entry.push('./examples/index.tsx')
+  entry = './examples/index.tsx'
   plugins.push(new HtmlWebpackPlugin({
     template: './examples/index.html',
-    filename: '/examples/index.html',
+    filename: '/index.html',
   }))
 }
 
 const config = {
   entry,
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
+    filename: isProduction ? 'index[hash:10].min.js' : 'index.js',
+    publicPath: '/',
+    clean: true,
   },
   devServer: {
-    open: true,
-    host: 'localhost',
-    static: {
-      directory: path.resolve(__dirname, 'dist/examples'),
-    }
+    host: '0.0.0.0',
   },
   plugins,
   module: {
@@ -63,9 +60,9 @@ const config = {
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.jsx', '.js', '...'],
+    extensions: ['.tsx', '.ts', '.jsx', '.js', '.css', '...'],
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      '@': path.resolve(__dirname, 'lib'),
     }
   },
 }

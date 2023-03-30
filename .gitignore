@@ -1,5 +1,6 @@
 *.log
 node_modules/
+build/
 dist/
 package_lock.json
 
