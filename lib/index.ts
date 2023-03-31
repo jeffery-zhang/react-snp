@@ -1,1 +1,1 @@
-export { Snp } from './components/Snp'
+export { Snp } from './Snp'

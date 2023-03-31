@@ -23,20 +23,31 @@ root.render(
         border: '1px solid green',
       }}>
         <Snp
-          defaults={{
-            width: 100,
-            height: 100,
-            x: '50%',
-            y: '50%',
-          }}
           style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: 'blue',
           }}
+          initial={{
+            x: '33%',
+            y: '33%',
+            w: '30%',
+            h: '30%',
+          }}
+          moveCallbacks={{
+            moveStartCallback: () => {
+              console.log('start move')
+            },
+            movingCallback: () => {
+              console.log('moving')
+            },
+            // moveEndCallback: () => {
+            //   console.log('stop move')
+            // },
+          }}
+          enableMove='vertical'
         >
-          <div style={{ color: '#fff' }}>react-snp</div>
+          <div style={{ color: '#fff', background: 'blue', padding: 10 }}>react-snp</div>
         </Snp>
       </div>
       

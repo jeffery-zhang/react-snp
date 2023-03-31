@@ -1,25 +1,30 @@
 .snpContainer {
-  box-sizing: border-box;
-  position: absolute;
-}
-
-.controllerContainer {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  z-index: 9999;
+  border: 1px dashed #ccc;
   cursor: move;
 }
 
-.controllers {
+.dragger {
   position: absolute;
   background: none;
-  z-index: 9999;
 }
 
-.topController {
+.ld {
+  width: 8px;
+  height: 100%;
+  left: -4px;
+  top: 0;
+  cursor: w-resize;
+}
+
+.rd {
+  width: 8px;
+  height: 100%;
+  right: -4px;
+  top: 0;
+  cursor: e-resize;
+}
+
+.td {
   width: 100%;
   height: 8px;
   left: 0;
@@ -27,7 +32,7 @@
   cursor: n-resize;
 }
 
-.bottomController {
+.bd {
   width: 100%;
   height: 8px;
   left: 0;
@@ -35,23 +40,7 @@
   cursor: s-resize;
 }
 
-.leftController {
-  width: 8px;
-  height: 100%;
-  left: -4px;
-  top: 0;
-  cursor: e-resize;
-}
-
-.rightController {
-  width: 8px;
-  height: 100%;
-  right: -4px;
-  top: 0;
-  cursor: w-resize;
-}
-
-.topLeftController {
+.ltd {
   width: 8px;
   height: 8px;
   left: -4px;
@@ -59,7 +48,7 @@
   cursor: nw-resize;
 }
 
-.topRightController {
+.rtd {
   width: 8px;
   height: 8px;
   right: -4px;
@@ -67,7 +56,7 @@
   cursor: ne-resize;
 }
 
-.bottomLeftController {
+.lbd {
   width: 8px;
   height: 8px;
   left: -4px;
@@ -75,7 +64,7 @@
   cursor: sw-resize;
 }
 
-.bottomRightController {
+.rbd {
   width: 8px;
   height: 8px;
   right: -4px;
