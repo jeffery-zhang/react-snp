@@ -6,20 +6,40 @@ const root = createRoot(document.getElementById('app') as HTMLElement)
 
 root.render(
   <React.StrictMode>
-    <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
-      <Snp
-        defaults={{
-          width: 200,
-          height: 200,
-          x: 100,
-          y: 100,
-        }}
-        style={{
-          backgroundColor: 'blue',
-        }}
-      >
-        <div>react-snp</div>
-      </Snp>
+    <div style={{
+      position: 'absolute',
+      width: '60vw',
+      height: '60vh',
+      left: '20%',
+      top: '20%',
+      border: '1px solid',
+    }}>
+      <div style={{
+        position: 'absolute',
+        width: '50%',
+        height: '50%',
+        left: '10%',
+        top: '10%',
+        border: '1px solid green',
+      }}>
+        <Snp
+          defaults={{
+            width: 100,
+            height: 100,
+            x: '50%',
+            y: '50%',
+          }}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'blue',
+          }}
+        >
+          <div style={{ color: '#fff' }}>react-snp</div>
+        </Snp>
+      </div>
+      
     </div>
   </React.StrictMode>
 )
