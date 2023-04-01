@@ -16,8 +16,8 @@ root.render(
     }}>
       <div style={{
         position: 'absolute',
-        width: '50%',
-        height: '50%',
+        width: '70%',
+        height: '70%',
         left: '10%',
         top: '10%',
         border: '1px solid green',
@@ -25,7 +25,8 @@ root.render(
         <Snp
           style={{
             display: 'flex',
-            justifyContent: 'center',
+            flexDirection: 'column',
+            justifyContent: 'space-around',
             alignItems: 'center',
           }}
           initial={{
@@ -45,9 +46,14 @@ root.render(
             //   console.log('stop move')
             // },
           }}
-          enableMove='vertical'
+          resizeCallbacks={{
+            resizeStartCallback(w, h) {
+              console.log(w, h)
+            },
+          }}
         >
-          <div style={{ color: '#fff', background: 'blue', padding: 10 }}>react-snp</div>
+          <div style={{ color: '#fff', background: '#aaa', padding: 10 }}>react-snp</div>
+          <div style={{ color: '#fff', background: '#aaa', padding: 10 }}>example</div>
         </Snp>
       </div>
       

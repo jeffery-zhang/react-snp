@@ -1,4 +1,5 @@
 .snpContainer {
+  box-sizing: border-box !important;
   border: 1px dashed #ccc;
   cursor: move;
 }

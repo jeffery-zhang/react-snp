@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
-import { calcPos, calcRect } from './utils'
-import type { FC, MouseEventHandler } from 'react'
-import type { SnpProps } from './interface'
+import { calcPos, calcRect, getComputedRectAndPos, transformRectLimits, getParentRect } from './utils'
+import type { FC } from 'react'
+import type { SnpProps, ResizeDirectionSet, HandledRectLimits } from './interface'
 import styles from './index.css'
 
 export const Snp: FC<SnpProps> = ({
@@ -16,8 +16,21 @@ export const Snp: FC<SnpProps> = ({
     h: 100,
   },
   moveCallbacks,
+  resizeCallbacks,
   enableMove = 'both',
   enableResize = 'both',
+  boundaries = {
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+  },
+  rectLimits = {
+    maxW: 'auto',
+    minW: 'auto',
+    maxH: 'auto',
+    minH: 'auto',
+  },
 }) => {
   const snpRef = useRef<HTMLDivElement>(null)
   const hasComputed = useRef<boolean>(false)
@@ -29,32 +42,68 @@ export const Snp: FC<SnpProps> = ({
     w: number
     h: number
   }>({ w: 0, h: 0 })
+  const [handledRectLimits, setLimits] = useState<HandledRectLimits>({
+    minW: 0,
+    maxW: 0,
+    minH: 0,
+    maxH: 0,
+  })
 
   useEffect(() => {
     if (snpRef.current) {
       setPos(() => calcPos(snpRef, bind))
-      setRect(() => calcRect(snpRef))
+      setRect(() => {
+        setLimits(transformRectLimits(snpRef, rectLimits))
+        return calcRect(snpRef)
+      })
       hasComputed.current = true
     }
   }, [snpRef])
 
-  const onMoveStart: MouseEventHandler<HTMLDivElement> = e => {
+  const onMoveStart = (
+    e: React.MouseEvent,
+    mode: 'move' | 'resize',
+    directionSet?: ResizeDirectionSet,
+  ) => {
     e.stopPropagation()
     const { x, y }: { x: number, y: number } = calcPos(snpRef, bind)
     const [mx, my]: [number, number] = [e.clientX, e.clientY]
-    moveCallbacks?.moveStartCallback?.()
+    const { w, h }: { w: number, h: number } = calcRect(snpRef)
+    const parentRect = getParentRect(snpRef)
+    mode === 'move' && moveCallbacks?.moveStartCallback?.(x, y)
+    mode === 'resize' && resizeCallbacks?.resizeStartCallback?.(w, h)
+    console.log(handledRectLimits)
 
     const handleMouseMove = (e: MouseEvent) => {
       e.preventDefault()
+      const computed = getComputedRectAndPos(
+        e,
+        { x, y },
+        { mx, my },
+        { w, h },
+        parentRect,
+        mode,
+        mode === 'move' ? enableMove : enableResize,
+        { boundaries, handledRectLimits },
+        directionSet,
+      )
       setPos({
-        x: enableMove === 'both' || enableMove === 'horizontal' ? x + (e.clientX - mx) : x,
-        y: enableMove === 'both' || enableMove === 'vertical' ? y + (e.clientY - my) : y,
+        x: computed.x,
+        y: computed.y,
       })
-      moveCallbacks?.movingCallback?.()
+      if (mode === 'resize') {
+        setRect({
+          w: computed.w,
+          h: computed.h,
+        })
+      }
+      mode === 'move' && moveCallbacks?.movingCallback?.(computed.x, computed.y)
+      mode === 'resize' && resizeCallbacks?.resizingCallback?.(computed.w, computed.h)
     }
     const handleMouseUp = () => {
       window.removeEventListener('mousemove', handleMouseMove)
-      moveCallbacks?.moveEndCallback?.()
+      mode === 'move' && moveCallbacks?.moveEndCallback?.(pos.x, pos.y)
+      mode === 'resize' && resizeCallbacks?.resizeEndCallback?.(rect.w, rect.h)
     }
 
     window.addEventListener('mousemove', handleMouseMove)
@@ -72,32 +121,40 @@ export const Snp: FC<SnpProps> = ({
       width: snpRef.current && hasComputed ? rect.w : initial.w,
       height: snpRef.current && hasComputed ? rect.h : initial.h,
     }}
-    onMouseDown={onMoveStart}
+    onMouseDown={e => onMoveStart(e, 'move')}
   >
     {children}
     <div
       className={`${styles.dragger} ${styles.ld}`}
+      onMouseDown={e => onMoveStart(e, 'resize', ['left'])}
     ></div>
     <div
       className={`${styles.dragger} ${styles.rd}`}
+      onMouseDown={e => onMoveStart(e, 'resize', ['right'])}
     ></div>
     <div
       className={`${styles.dragger} ${styles.td}`}
+      onMouseDown={e => onMoveStart(e, 'resize', ['top'])}
     ></div>
     <div
       className={`${styles.dragger} ${styles.bd}`}
+      onMouseDown={e => onMoveStart(e, 'resize', ['bottom'])}
     ></div>
     <div
       className={`${styles.dragger} ${styles.ltd}`}
+      onMouseDown={e => onMoveStart(e, 'resize', ['left', 'top'])}
     ></div>
     <div
       className={`${styles.dragger} ${styles.rtd}`}
+      onMouseDown={e => onMoveStart(e, 'resize', ['right', 'top'])}
     ></div>
     <div
       className={`${styles.dragger} ${styles.lbd}`}
+      onMouseDown={e => onMoveStart(e, 'resize', ['left', 'bottom'])}
     ></div>
     <div
       className={`${styles.dragger} ${styles.rbd}`}
+      onMouseDown={e => onMoveStart(e, 'resize', ['right', 'bottom'])}
     ></div>
   </div>
 }
