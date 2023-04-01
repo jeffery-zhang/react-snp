@@ -39,17 +39,23 @@ root.render(
             moveStartCallback: () => {
               console.log('start move')
             },
-            movingCallback: () => {
-              console.log('moving')
-            },
-            // moveEndCallback: () => {
-            //   console.log('stop move')
-            // },
           }}
           resizeCallbacks={{
             resizeStartCallback(w, h) {
               console.log(w, h)
             },
+          }}
+          boundaries={{
+            left: 30,
+            right: -30,
+            top: 0,
+            bottom: 20,
+          }}
+          rectLimits={{
+            minW: 250,
+            minH: 'auto',
+            maxW: 300,
+            maxH: 800,
           }}
         >
           <div style={{ color: '#fff', background: '#aaa', padding: 10 }}>react-snp</div>
