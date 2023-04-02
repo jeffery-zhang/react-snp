@@ -89,7 +89,7 @@ export const transformRectLimits = (ref: RefObject<HTMLElement>, rectLimits: Rec
 }
 
 /**
- * @description 计算鼠标拖动元素宽高时的几何属性
+ * @description 计算鼠标拖动元素位置和宽高时的几何属性
  * @param {MouseEvent} e
  * @param {{ x: number, y: number }} initPos
  * @param {{ x: number, y: number }} initMPos

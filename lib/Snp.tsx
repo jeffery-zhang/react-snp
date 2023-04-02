@@ -72,7 +72,6 @@ export const Snp: FC<SnpProps> = ({
     const parentRect = getParentRect(snpRef)
     mode === 'move' && moveCallbacks?.moveStartCallback?.(x, y)
     mode === 'resize' && resizeCallbacks?.resizeStartCallback?.(w, h)
-    console.log(handledRectLimits)
 
     const handleMouseMove = (e: MouseEvent) => {
       e.preventDefault()
