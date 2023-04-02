@@ -1,8 +1,10 @@
 {
-  "name": "my-webpack-project",
+  "name": "react-snp",
+  "title": "react-snp",
   "version": "1.0.0",
-  "description": "My webpack project",
-  "main": "index.js",
+  "description": "",
+  "main": "./build/index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "test",
     "build": "webpack --mode=production --node-env=production",
@@ -18,12 +20,10 @@
   "keywords": [
     "drag",
     "resize",
+    "size",
     "position",
     "react",
-    "snp",
-    "size",
-    "and",
-    "position"
+    "snp"
   ],
   "author": "jeffery-zhang",
   "license": "ISC",

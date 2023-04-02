@@ -23,7 +23,7 @@ const config = {
   entry,
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: isProduction ? 'index[hash:10].min.js' : 'index.js',
+    filename: 'index.js',
     publicPath: '/',
     clean: true,
   },
