@@ -2,6 +2,7 @@
   box-sizing: border-box !important;
   border: 1px dashed #ccc;
   cursor: move;
+  z-index: 9999;
 }
 
 .dragger {
