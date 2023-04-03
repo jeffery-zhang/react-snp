@@ -1,7 +1,7 @@
 {
   "name": "react-snp",
   "title": "react-snp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "./build/index.js",
   "types": "index.d.ts",
