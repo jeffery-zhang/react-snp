@@ -26,6 +26,8 @@ const config = {
     filename: 'index.js',
     publicPath: '/',
     clean: true,
+    library: 'react-snp',
+    libraryTarget: 'umd',
   },
   devServer: {
     host: '0.0.0.0',
