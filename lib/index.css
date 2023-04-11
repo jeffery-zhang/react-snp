@@ -1,7 +1,6 @@
 .snpContainer {
   box-sizing: border-box !important;
   border: 1px dashed #ccc;
-  cursor: move;
   z-index: 9999;
 }
 
@@ -15,7 +14,6 @@
   height: 100%;
   left: -4px;
   top: 0;
-  cursor: w-resize;
 }
 
 .rd {
@@ -23,7 +21,6 @@
   height: 100%;
   right: -4px;
   top: 0;
-  cursor: e-resize;
 }
 
 .td {
@@ -31,7 +28,6 @@
   height: 8px;
   left: 0;
   top: -4px;
-  cursor: n-resize;
 }
 
 .bd {
@@ -39,7 +35,6 @@
   height: 8px;
   left: 0;
   bottom: -4px;
-  cursor: s-resize;
 }
 
 .ltd {
@@ -47,7 +42,6 @@
   height: 8px;
   left: -4px;
   top: -4px;
-  cursor: nw-resize;
 }
 
 .rtd {
@@ -55,7 +49,6 @@
   height: 8px;
   right: -4px;
   top: -4px;
-  cursor: ne-resize;
 }
 
 .lbd {
@@ -63,7 +56,6 @@
   height: 8px;
   left: -4px;
   bottom: -4px;
-  cursor: sw-resize;
 }
 
 .rbd {
@@ -71,5 +63,4 @@
   height: 8px;
   right: -4px;
   bottom: -4px;
-  cursor: se-resize;
 }

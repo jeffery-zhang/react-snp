@@ -119,40 +119,49 @@ export const Snp: FC<SnpProps> = ({
       top: snpRef.current && hasComputed ? pos.y : initial.y,
       width: snpRef.current && hasComputed ? rect.w : initial.w,
       height: snpRef.current && hasComputed ? rect.h : initial.h,
+      cursor: enableMove === 'disabled' ? 'default' : 'move',
     }}
     onMouseDown={e => onMoveStart(e, 'move')}
   >
     {children}
     <div
       className={`${styles.dragger} ${styles.ld}`}
+      style={{ cursor: ['both', 'horizontal'].includes(enableResize) ? 'w-resize' : 'default' }}
       onMouseDown={e => onMoveStart(e, 'resize', ['left'])}
     ></div>
     <div
       className={`${styles.dragger} ${styles.rd}`}
+      style={{ cursor: ['both', 'horizontal'].includes(enableResize) ? 'e-resize' : 'default' }}
       onMouseDown={e => onMoveStart(e, 'resize', ['right'])}
     ></div>
     <div
       className={`${styles.dragger} ${styles.td}`}
+      style={{ cursor: ['both', 'vertical'].includes(enableResize) ? 'n-resize' : 'default' }}
       onMouseDown={e => onMoveStart(e, 'resize', ['top'])}
     ></div>
     <div
       className={`${styles.dragger} ${styles.bd}`}
+      style={{ cursor: ['both', 'vertical'].includes(enableResize) ? 's-resize' : 'default' }}
       onMouseDown={e => onMoveStart(e, 'resize', ['bottom'])}
     ></div>
     <div
       className={`${styles.dragger} ${styles.ltd}`}
+      style={{ cursor: enableResize === 'disabled' ? 'default' : 'nw-resize' }}
       onMouseDown={e => onMoveStart(e, 'resize', ['left', 'top'])}
     ></div>
     <div
       className={`${styles.dragger} ${styles.rtd}`}
+      style={{ cursor: enableResize === 'disabled' ? 'default' : 'ne-resize' }}
       onMouseDown={e => onMoveStart(e, 'resize', ['right', 'top'])}
     ></div>
     <div
       className={`${styles.dragger} ${styles.lbd}`}
+      style={{ cursor: enableResize === 'disabled' ? 'default' : 'sw-resize' }}
       onMouseDown={e => onMoveStart(e, 'resize', ['left', 'bottom'])}
     ></div>
     <div
       className={`${styles.dragger} ${styles.rbd}`}
+      style={{ cursor: enableResize === 'disabled' ? 'default' : 'se-resize' }}
       onMouseDown={e => onMoveStart(e, 'resize', ['right', 'bottom'])}
     ></div>
   </div>

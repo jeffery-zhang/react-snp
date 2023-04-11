@@ -35,6 +35,8 @@ root.render(
             w: '30%',
             h: '30%',
           }}
+          enableResize='vertical'
+          enableMove='disabled'
           moveCallbacks={{
             moveStartCallback: () => {
               console.log('start move')

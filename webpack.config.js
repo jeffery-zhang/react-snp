@@ -29,10 +29,6 @@ const config = {
     library: 'react-snp',
     libraryTarget: 'umd',
   },
-  externals: {
-    react: 'react',
-    'react-dom': 'react-dom',
-  },
   devServer: {
     host: '0.0.0.0',
   },
@@ -76,6 +72,10 @@ const config = {
 module.exports = () => {
   if (isProduction) {
     config.mode = 'production'
+    config['externals'] = {
+      react: 'react',
+      'react-dom': 'react-dom',
+    }
   } else {
     config.mode = 'development'
   }
